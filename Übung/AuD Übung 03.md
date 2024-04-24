@@ -1,11 +1,12 @@
 ---
 tags:
-  - WiSe_23-24
   - Übung
   - AuD
   - Hausaufgabe
-createdAt:
+  - SoSe_24
+createdAt: 2024-04-23
 ---
+[PDF](t03.pdf)
 ## 5
 ### 1
 #### a)

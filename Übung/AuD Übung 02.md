@@ -1,11 +1,12 @@
 ---
 tags:
-  - WiSe_23-24
   - Übung
   - Hausaufgabe
   - AuD
+  - SoSe_24
 createdAt: 2024-04-16
 ---
+[PDF](t02.pdf)
 ## 3 ADT Pair
 ### 1.
 ```
