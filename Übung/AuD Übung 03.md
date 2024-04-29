@@ -90,28 +90,4 @@ T: I(T) Datentyp des Grundtypen
    I(le) = I(T) x I(p) x I(p)
 ```
 
-
-
-
-???
-```
-type ListElement = 
-	sorts:
-		T, p, le 
-	
-	functions:
-		new: T -> le 
-		getValue: le -> T 
-		setValue: le x T -> le 
-		getNext: le -> p 
-		setNext: le x p -> le 
-end.
-
-
-type D-listElement extends ListElement =		
-	functions:
-		getPrev: le -> p
-		setPrev: le x p -> le
-end.
-```
 ### 3
