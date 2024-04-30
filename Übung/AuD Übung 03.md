@@ -91,3 +91,84 @@ T: I(T) Datentyp des Grundtypen
 ```
 
 ### 3
+insert
+```pseudo
+\begin{algorithm}
+\caption{Insert Element}
+\begin{algorithmic}
+\Function{insert}{$list$, $element$, $position$}
+\State $newNode \gets new(element)$
+\If{$position = 0$}
+\State $newNode.setNext(list.head)$
+\If{$list.head \neq \text{null}$}
+\State $list.head.setPrev(newNode)$
+\EndIf
+\State $list.head \gets newNode$
+\Else
+\State $current \gets list.head$
+\For{$i \gets 1$ \textbf{to} $position-1$}
+\State $current \gets current.getNext()$
+\EndFor
+\State $newNode.setNext(current.getNext())$
+\State $newNode.setPrev(current)$
+\If{$current.getNext() \neq \text{null}$}
+\State $current.getNext().setPrev(newNode)$
+\EndIf
+\State $current.setNext(newNode)$
+\EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+```
+
+delete
+```pseudo
+\begin{algorithm}
+\caption{Delete Element}
+\begin{algorithmic}
+\Input nicht leere DLL $list$, index $position$
+\Output DLL $list$ without elm at position
+\Function{delete}{$list$, $position$}
+\If{$position = 0$}
+\State $temp \gets list.head$
+\State $list.head \gets list.head.getNext()$
+\If{$list.head \neq \text{null}$}
+\State $list.head.setPrev(\text{null})$
+\EndIf
+\Else
+\State $current \gets list.head$
+\For{$i \gets 1$ \textbf{to} $position$}
+\State $current \gets current.getNext()$
+\EndFor
+\State $current.getPrev().setNext(current.getNext())$
+\If{$current.getNext() \neq \text{null}$}
+\State $current.getNext().setPrev(current.getPrev())$
+\EndIf
+\EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+```
+
+
+concat
+```pseudo
+\begin{algorithm}
+\caption{Concat Lists}
+\begin{algorithmic}
+\Input DLL $list1$, DLL $list1$
+\Output DLL $list$ concatenated $list1$ and $list2$
+\Function{concat}{$list1$, $list2$}
+\If{$list1.tail \neq \text{null}$}
+\State $list1.tail.setNext(list2.head)$
+\EndIf
+\If{$list2.head \neq \text{null}$}
+\State $list2.head.setPrev(list1.tail)$
+\EndIf
+\State $list1.tail \gets list2.tail$
+\return $list1$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+```
