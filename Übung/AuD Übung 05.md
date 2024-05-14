@@ -2,6 +2,10 @@
 ## 1.
 ### iterativ
 ```run-python
+'''
+Input: ganze Zahl n >= 0
+Output: ganze Zahl Fakultät von n
+'''
 def factorial_iterative(n):
     result = 1
     for i in range(1, n + 1):
@@ -15,6 +19,10 @@ print(f"Iterative: {n}! = {factorial_iterative(n)}")
 
 ### rekursiv
 ```run-python
+'''
+Input: ganze Zahl n >= 0
+Output: ganze Zahl Fakultät von n
+'''
 def factorial_recursive(n):
     if n == 0:
         return 1
@@ -115,7 +123,7 @@ def maxTeilsumme (arr, low, high):
 
 # Example usage
 sequence = [4, -3, -2, 5, 2, 1, -5, 7]
-print("Divide and Conquer Maximum Subarray Sum:", maxTeilsumme (sequence, 0, len(sequence) - 1))
+print("Divide and Conquer Maximum Subarray Sum:", maxTeilsumme(sequence, 0, len(sequence) - 1))
 ```
 
 #### Aufrufe
