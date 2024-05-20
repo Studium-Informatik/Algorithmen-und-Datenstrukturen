@@ -1,3 +1,5 @@
+git submodule foreach ./upload.bat
+
 git checkout main
 git pull --rebase
 git add --all
