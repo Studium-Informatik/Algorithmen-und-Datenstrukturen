@@ -210,3 +210,35 @@ Maximale Innere Knoten
 \end{tikzpicture}
 \end{document}
 ```
+
+## 3.
+### a)
+
+### b)
+Maximale Anzahl an Knoten mit Tiefe $T$: $$\lvert V \rvert = \sum_{i=0}^{T}2^i=\frac{1-2^{T+1}}{1-2}=\frac{1-2^{T+1}}{-1}$$
+
+**Induktionsanfang**:
+Für $d=0$, Baum besteht nur aus Wurzel
+
+$2^{d+1}-1=2^1-1=2-1=1$ 
+gilt für $d=0$
+
+**Induktionsvoraussetzung**:
+Angenommen die Gleichung gilt für $d=k$
+$2^{d+1}-1$
+
+**Induktionsschritt**:
+für $d=k+1$
+
+$$\displaylines{
+2^{d+1+1}-1&=&2\cdot2^{d+1}-1\\
+2\cdot2^{d+1}-1&\leq&\frac{1-2^{d+1+1}}{-1}\\
+&\leq&-1+2^{d+1+1}\\
+2\cdot 2^{d+1}-1&=&2\cdot 2^{d+1}-1
+}$$
+
+
+$$\displaylines{
+\sum_{i=0}^{d-1}2^i=\frac{1-2^d}{-1}=2^d-1\\
+2^d
+}$$
