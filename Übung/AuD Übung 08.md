@@ -3,7 +3,8 @@ tags:
   - Übung
   - Präsenz
   - SoSe_24
-createdAt:
+  - AuD
+createdAt: 2024-06-02
 ---
 [PDF](t08.pdf)
 
