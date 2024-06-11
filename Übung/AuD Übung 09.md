@@ -46,9 +46,9 @@ createdAt: 2024-06-10
    
   \node[circle, draw] (1) {$11$}
     child {node[circle, draw] (2) {$2$}
-      child {node[circle, draw] (3) {$19$}
+      child {node[circle, draw] (3) {$38$}
         child {node[circle, draw] (4) {$2$}}
-        child {node[circle, draw] (5) {$38$}}
+        child {node[circle, draw] (5) {$19$}}
       }
       child {node[circle, draw] (6) {$3$}}
     }
@@ -56,7 +56,84 @@ createdAt: 2024-06-10
       child {node[circle, draw] (8) {$7$}}
       child {node[circle, draw] (9) {$78$}}
     };
-	\draw[<->, color=red] (1) to[out=145,in=135,distance=2.5cm] (4);
+	\draw[<->, color=red] (3) to (5);
+\end{tikzpicture}
+\end{document}
+```
+
+```tikz
+\begin{document}
+\begin{tikzpicture}
+  [level distance=1.5cm,
+   level 1/.style={sibling distance=4.5cm},
+   level 2/.style={sibling distance=2.25cm},
+   level 3/.style={sibling distance=1.125cm}]
+   
+  \node[circle, draw] (1) {$11$}
+    child {node[circle, draw] (2) {$2$}
+      child {node[circle, draw] (3) {$38$}
+        child {node[circle, draw] (4) {$2$}}
+        child {node[circle, draw] (5) {$19$}}
+      }
+      child {node[circle, draw] (6) {$3$}}
+    }
+    child {node[circle, draw] (7) {$78$}
+      child {node[circle, draw] (8) {$7$}}
+      child {node[circle, draw] (9) {$0$}}
+    };
+	\draw[<->, color=red] (7) to (9);
+\end{tikzpicture}
+\end{document}
+```
+
+```tikz
+\begin{document}
+\begin{tikzpicture}
+  [level distance=1.5cm,
+   level 1/.style={sibling distance=4.5cm},
+   level 2/.style={sibling distance=2.25cm},
+   level 3/.style={sibling distance=1.125cm}]
+   
+  \node[circle, draw] (1) {$11$}
+    child {node[circle, draw] (2) {$38$}
+      child {node[circle, draw] (3) {$19$}
+        child {node[circle, draw] (4) {$2$}}
+        child {node[circle, draw] (5) {$2$}}
+      }
+      child {node[circle, draw] (6) {$3$}}
+    }
+    child {node[circle, draw] (7) {$78$}
+      child {node[circle, draw] (8) {$7$}}
+      child {node[circle, draw] (9) {$0$}}
+    };
+	\draw[<->, color=red] (2) to (3);
+	\draw[<->, color=red] (3) to (5);
+\end{tikzpicture}
+\end{document}
+```
+
+
+```tikz
+\begin{document}
+\begin{tikzpicture}
+  [level distance=1.5cm,
+   level 1/.style={sibling distance=4.5cm},
+   level 2/.style={sibling distance=2.25cm},
+   level 3/.style={sibling distance=1.125cm}]
+   
+  \node[circle, draw] (1) {$78$}
+    child {node[circle, draw] (2) {$38$}
+      child {node[circle, draw] (3) {$19$}
+        child {node[circle, draw] (4) {$2$}}
+        child {node[circle, draw] (5) {$2$}}
+      }
+      child {node[circle, draw] (6) {$3$}}
+    }
+    child {node[circle, draw] (7) {$11$}
+      child {node[circle, draw] (8) {$7$}}
+      child {node[circle, draw] (9) {$0$}}
+    };
+	\draw[<->, color=red] (1) to (7);
 \end{tikzpicture}
 \end{document}
 ```
@@ -93,17 +170,18 @@ $m\geq \text{nächste Primzahl} \geq k\cdot n$
 ### 3.
 #### a)
 
-| 0   | Franz                                                         |
-| --- | ------------------------------------------------------------- |
-| 1   |                                                               |
-| 2   |                                                               |
-| 3   | Susi                                                          |
-| 4   |                                                               |
-| 5   | Ali -> Alfred -> Arno -> Alice -> Kurt -> Alex -> Angy -> Alf |
-| 6   | Babsi -> Benno -> Bine                                        |
-| 7   | Max                                                           |
-| 8   |                                                               |
-| 9   |                                                               |
+| Hash | Key                                                           |
+| ---- | ------------------------------------------------------------- |
+| 0    | Franz                                                         |
+| 1    |                                                               |
+| 2    |                                                               |
+| 3    | Susi                                                          |
+| 4    |                                                               |
+| 5    | Ali -> Alfred -> Arno -> Alice -> Kurt -> Alex -> Angy -> Alf |
+| 6    | Babsi -> Benno -> Bine                                        |
+| 7    | Max                                                           |
+| 8    |                                                               |
+| 9    |                                                               |
 
 ```run-python
 names = [ "Ali", "Babsi", "Alfred", "Arno", "Alice", "Benno", "Kurt", "Alex", "Angy", "Bine", "Max", "Franz", "Susi", "Alf"]
@@ -121,22 +199,25 @@ def main():
 
 
 if __name__ == "__main__":
+	for i in names:
+		print(f"{i}: {ord(i[0])}, {ord(i[-1])}")
 	main()
 ```
 
 #### b)
 
-| 0   | Ali                           |
-| --- | ----------------------------- |
-| 1   | Babsi -> Alex                 |
-| 2   | Alfred -> Angy                |
-| 3   | Alice -> Max -> Franz -> Susi |
-| 4   | Kurt -> Bine -> Alf           |
-| 5   |                               |
-| 6   | Arno                          |
-| 7   | Benno                         |
-| 8   |                               |
-| 9   |                               |
+| Hash | Key                           |
+| ---- | ----------------------------- |
+| 0    | Ali                           |
+| 1    | Babsi -> Alex                 |
+| 2    | Alfred -> Angy                |
+| 3    | Alice -> Max -> Franz -> Susi |
+| 4    | Kurt -> Bine -> Alf           |
+| 5    |                               |
+| 6    | Arno                          |
+| 7    | Benno                         |
+| 8    |                               |
+| 9    |                               |
 
 ```run-python
 names = [ "Ali", "Babsi", "Alfred", "Arno", "Alice", "Benno", "Kurt", "Alex", "Angy", "Bine", "Max", "Franz", "Susi", "Alf"]
@@ -162,7 +243,7 @@ if __name__ == "__main__":
 Summe der Suchschritte = $1 + 1 + 2 + 3 + 4 + 2 + 5 + 6 + 7 + 3 + 1 + 1 + 1 + 8 = 45$
 
 #### b)
-Summe der Suchschritte = $1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 2 + 2 + 2 + 3 + 4 + 3 = 24$
+Summe der Suchschritte = $1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 2 + 2 + 2 + 3 + 4 + 3 = 25$
 
 ### 5.
 Pro:
