@@ -143,20 +143,169 @@ Removing 7
 \Output Tree $t$
   \Function{add}{$x$, $t$}
     \If{t == null}
-	    \Return new Node(node)
-	    \Comment{create new Tree}
+        \Return new Node(x)
+        \Comment{create new Tree with the value x}
     \EndIf
     \If{t.value == x}
-	    \Return t
-	    \Comment{if node allready exsists}
+        \Return False
+        \Comment{if node already exists, return False}
     \EndIf
     \If{x < t.value}
-	    \State $t.left \gets add(x, t.left)$
-	    \Comment{Traverse throu left side}
+        \If{t.left == null}
+            \State $t.left \gets new Node(x)$
+            \State $t.left.parent \gets t$
+            \Return True
+            \Comment{add new node as left child}
+        \Else
+            \Return add(x, t.left)
+            \Comment{traverse through left side}
+        \EndIf
     \Else
-	    \State $t.right \gets add(x, t.right)$
-	    \Comment{Traverse throu right side}
+        \If{t.right == null}
+            \State $t.right \gets new Node(x)$
+            \State $t.right.parent \gets t$
+            \Return True
+            \Comment{add new node as right child}
+        \Else
+            \Return add(x, t.right)
+            \Comment{traverse through right side}
+        \EndIf
     \EndIf
+    \Return False
+  \EndFunction
+\end{algorithmic}
+\end{algorithm}
+```
+
+### 3.
+#### rec
+```pseudo
+\begin{algorithm}
+\caption{remove}
+\begin{algorithmic}
+\Input Wert $x$, Baum $t$
+\Output Baum $t$
+  \Function{remove}{$x$, $t$}
+    \If{$t == null$}
+        \Return null
+        \Comment{Knoten nicht gefunden}
+    \EndIf
+    
+    \If{$x < content(t)$}
+        \State $setLeft(t, remove(x, left(t)))$
+    \ElsIf{$x > content(t)$}
+        \State $setRight(t, remove(x, right(t)))$
+    \Else
+        \Comment{Knoten gefunden, Bearbeitung je nach Fall}
+        
+        \If{$left(t) == null$}
+            \Return right(t)
+            \Comment{Fall 1: Knoten hat nur ein rechtes Kind oder ist ein Blatt}
+        \ElsIf{$right(t) == null$}
+            \Return left(t)
+            \Comment{Fall 1: Knoten hat nur ein linkes Kind oder ist ein Blatt}
+        \Else
+            \Comment{Fall 3: Knoten hat zwei Kinder}
+            \State $successor \gets findMin(right(t))$
+            \State $setContent(t, content(successor))$
+            \State $setRight(t, remove(content(successor), right(t)))$
+        \EndIf
+    \EndIf
+
+    \Return t
+  \EndFunction
+
+  \Function{findMin}{$t$}
+    \While{$left(t) \neq null$}
+        \State $t \gets left(t)$
+    \EndWhile
+    \Return t
+  \EndFunction
+\end{algorithmic}
+\end{algorithm}
+```
+
+#### itter
+```pseudo
+\begin{algorithm}
+\caption{remove}
+\begin{algorithmic}
+\Input Wert $x$, Baum $t$
+\Output Boolean
+  \Function{remove}{$x$, $t$}
+    \State $current \gets t$
+    \State $parent \gets null$
+    \State $isLeftChild \gets false$
+
+    \While{$current \neq null$ \textbf{and} $content(current) \neq x$}
+        \State $parent \gets current$
+        \If{$x < content(current)$}
+            \State $isLeftChild \gets true$
+            \State $current \gets left(content(current))$
+        \Else
+            \State $isLeftChild \gets false$
+            \State $current \gets right(content(current))$
+        \EndIf
+    \EndWhile
+
+    \If{$current == null$}
+        \Return False
+        \Comment{Knoten nicht gefunden}
+    \EndIf
+
+    \If{$left(content(current)) == null$ \textbf{and} $right(content(current)) == null$}
+        \Comment{Fall 1: Knoten ist ein Blatt}
+        \If{$current == t$}
+            \Return False
+            \Comment{Die Wurzel wird nie entfernt}
+        \ElsIf{$isLeftChild$}
+            \State $setLeft(parent, null)$
+        \Else
+            \State $setRight(parent, null)$
+        \EndIf
+    \ElsIf{$right(content(current)) == null$}
+        \Comment{Fall 2: Knoten hat nur ein linkes Kind}
+        \If{$current == t$}
+            \Return False
+            \Comment{Die Wurzel wird nie entfernt}
+        \ElsIf{$isLeftChild$}
+            \State $setLeft(parent, adress(left(content(current))))$
+        \Else
+            \State $setRight(parent, adress(left(content(current))))$
+        \EndIf
+        \State $setParent(left(content(current)), address(parent))$
+    \ElsIf{$left(content(current)) == null$}
+        \Comment{Fall 2: Knoten hat nur ein rechtes Kind}
+        \If{$current == t$}
+            \Return False
+            \Comment{Die Wurzel wird nie entfernt}
+        \ElsIf{$isLeftChild$}
+            \State $setLeft(parent, address(right(content(current))))$
+        \Else
+            \State $setRight(parent, address(right(content(current))))$
+        \EndIf
+        \State $setParent(right(content(current)), address(parent))$
+    \Else
+        \Comment{Fall 3: Knoten hat zwei Kinder}
+        \State $successor \gets right(content(current))$
+        \State $successorParent \gets current$
+        \While{$left(content(successor)) \neq null$}
+            \State $successorParent \gets successor$
+            \State $successor \gets left(content(successor))$
+        \EndWhile
+
+        \State $content(current) \gets content(successor)$
+        \If{$left(successorParent) == successor$}
+            \State $left(successorParent) \gets right(content(successor))$
+        \Else
+            \State $setRight(successorParent, address(right(content(successor))))$
+        \EndIf
+        \If{$right(content(successor)) \neq null$}
+            \State $setParent(right(content(successor)), address(successorParent))$
+        \EndIf
+    \EndIf
+
+    \Return True
   \EndFunction
 \end{algorithmic}
 \end{algorithm}
